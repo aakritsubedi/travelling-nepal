@@ -18,7 +18,7 @@ class Destination {
 
 List<Activity> activities = [
   Activity(
-    imageUrl: 'assets/images/stmarksbasilica.jpg',
+    imageUrl: 'http://www.gettyimages.com/detail/686304898',
     name: 'St. Mark\'s Basilica',
     type: 'Sightseeing Tour',
     startTimes: ['9:00 am', '11:00 am'],
@@ -26,7 +26,7 @@ List<Activity> activities = [
     price: 30,
   ),
   Activity(
-    imageUrl: 'assets/images/gondola.jpg',
+    imageUrl: 'http://www.gettyimages.com/detail/624372600',
     name: 'Walking Tour and Gonadola Ride',
     type: 'Sightseeing Tour',
     startTimes: ['11:00 pm', '1:00 pm'],
@@ -45,35 +45,35 @@ List<Activity> activities = [
 
 List<Destination> destinations = [
   Destination(
-    imageUrl: 'assets/images/venice.jpg',
+    imageUrl: 'https://cdn.pixabay.com/photo/2019/12/13/08/21/gokyo-ri-4692458_960_720.jpg',
     city: 'Venice',
     country: 'Italy',
     description: 'Visit Venice for an amazing and unforgettable adventure.',
     activities: activities,
   ),
   Destination(
-    imageUrl: 'assets/images/paris.jpg',
+    imageUrl: 'https://cdn.pixabay.com/photo/2013/04/05/13/02/buddha-100706_960_720.jpg',
     city: 'Paris',
     country: 'France',
     description: 'Visit Paris for an amazing and unforgettable adventure.',
     activities: activities,
   ),
   Destination(
-    imageUrl: 'assets/images/newdelhi.jpg',
+    imageUrl: 'https://cdn.pixabay.com/photo/2016/10/30/05/46/buddhism-1782432_960_720.jpg',
     city: 'New Delhi',
     country: 'India',
     description: 'Visit New Delhi for an amazing and unforgettable adventure.',
     activities: activities,
   ),
   Destination(
-    imageUrl: 'assets/images/saopaulo.jpg',
+    imageUrl: 'https://cdn.pixabay.com/photo/2017/07/04/05/56/pashupatinath-2470062_960_720.jpg',
     city: 'Sao Paulo',
     country: 'Brazil',
     description: 'Visit Sao Paulo for an amazing and unforgettable adventure.',
     activities: activities,
   ),
   Destination(
-    imageUrl: 'assets/images/newyork.jpg',
+    imageUrl: 'https://cdn.pixabay.com/photo/2016/09/15/01/57/chiang-mai-1670926_960_720.jpg',
     city: 'New York City',
     country: 'United States',
     description: 'Visit New York for an amazing and unforgettable adventure.',
