@@ -5,4 +5,6 @@ Color secondaryColor = Color(0xFF02075D);
 
 
 class DataSource {
+  static String appName = 'Travelling Nepal';
+  static String tagline = 'once is not enough';
 }

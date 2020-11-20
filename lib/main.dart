@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travellingNepal/app.dart';
 import 'package:travellingNepal/screens/Home.dart';
 
 void main() {
@@ -10,13 +11,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Travelling Nepal',
+      title: DataSource.appName,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Travelling Nepal'),
+      home: MyHomePage(title: DataSource.appName, tagline: DataSource.tagline),
     );
   }
 }
