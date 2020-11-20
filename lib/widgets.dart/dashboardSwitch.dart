@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travellingNepal/widgets.dart/DefaultContent.dart';
+import 'package:travellingNepal/widgets.dart/airport.dart';
 
 class DashboardSwitch extends StatelessWidget {
 
@@ -17,6 +18,7 @@ class DashboardSwitch extends StatelessWidget {
       child: Column(
         children: [
          if(index == -1) DefaultContent()
+         else if(index == 0) Airport()
         ] 
       ),
     );
