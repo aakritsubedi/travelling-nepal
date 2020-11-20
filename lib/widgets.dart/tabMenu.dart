@@ -30,7 +30,7 @@ class TabMenu extends StatelessWidget {
         child: Icon(
           menus[index],
           size: 25.0,
-          color: this.index == index ? primaryWhite : secondaryColor,
+          color: this.index == index ? primaryWhite : primaryBlack,
         ),
       ),
     );

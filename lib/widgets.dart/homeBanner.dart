@@ -7,7 +7,7 @@ class HomeBanner extends StatelessWidget {
     return Container(
         child: App.getText(
             'What you would like to find?',
-            secondaryColor,
+            primaryBlack,
             25.0,
             true,
             EdgeInsets.only(left: 20.0, top: 30.0, right: 60.0),

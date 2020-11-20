@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travellingNepal/widgets.dart/dashboardSwitch.dart';
 import 'package:travellingNepal/widgets.dart/homeBanner.dart';
 import 'package:travellingNepal/widgets.dart/tabMenu.dart';
 
@@ -14,7 +15,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  int selectedTabIndex = 0;
+  int selectedTabIndex = -1;
 
   setTabIndex(index) {
     setState(() {
@@ -33,7 +34,8 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             HomeBanner(),
             SizedBox(height: 10.0),
-            TabMenu(index: selectedTabIndex, setIndex: setTabIndex)
+            TabMenu(index: selectedTabIndex, setIndex: setTabIndex),
+            DashboardSwitch(index: selectedTabIndex)
           ],
         ),
       ),
