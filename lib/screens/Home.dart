@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:travellingNepal/widgets.dart/homeBanner.dart';
+import 'package:travellingNepal/widgets.dart/tabMenu.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title, this.tagline}) : super(key: key);
@@ -11,24 +13,27 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  int selectedTabIndex = 0;
+
+  setTabIndex(index) {
+    setState(() {
+      selectedTabIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(widget.title),
-            Text(widget.tagline, style: TextStyle(fontSize: 12.0),)
-          ],
-        ),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      body: SafeArea(
+        child: ListView(
+          padding: EdgeInsets.symmetric(
+            vertical: 0.0
+          ),
           children: <Widget>[
-            Text(widget.title, style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),),
-            Text(widget.tagline)
+            HomeBanner(),
+            SizedBox(height: 10.0),
+            TabMenu(index: selectedTabIndex, setIndex: setTabIndex)
           ],
         ),
       ),

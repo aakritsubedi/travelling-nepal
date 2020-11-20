@@ -11,13 +11,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: DataSource.appName,
+      title: App.appName,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: DataSource.appName, tagline: DataSource.tagline),
+      home: MyHomePage(title: App.appName, tagline: App.tagline),
     );
   }
 }
