@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:travellingNepal/app.dart';
 import 'package:travellingNepal/widgets.dart/aboutNepalCarousel.dart';
 import 'package:travellingNepal/widgets.dart/destinationCarousel.dart';
+import 'package:travellingNepal/widgets.dart/homeBanner.dart';
+import 'package:travellingNepal/widgets.dart/tabMenu.dart';
 
 class DefaultContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
+      HomeBanner(),
+      SizedBox(height: 10.0),
+      TabMenu(),
+      SizedBox(height: 10.0),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -24,8 +30,7 @@ class DefaultContent extends StatelessWidget {
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          App.getText(
-              'Why Nepal?', primaryBlack, 18.0, true, null, null, 1.5),
+          App.getText('Why Nepal?', primaryBlack, 18.0, true, null, null, 1.5),
           GestureDetector(
               onTap: () {},
               child: App.getText(

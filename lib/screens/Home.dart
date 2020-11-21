@@ -2,8 +2,6 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:travellingNepal/app.dart';
 import 'package:travellingNepal/widgets.dart/dashboardSwitch.dart';
-import 'package:travellingNepal/widgets.dart/homeBanner.dart';
-import 'package:travellingNepal/widgets.dart/tabMenu.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title, this.tagline}) : super(key: key);
@@ -42,11 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: SafeArea(
         child: ListView(
-          padding: EdgeInsets.symmetric(vertical: 0.0),
           children: <Widget>[
-            HomeBanner(),
-            SizedBox(height: 10.0),
-            TabMenu(index: selectedTabIndex),
             DashboardSwitch(index: selectedTabIndex)
           ],
         ),

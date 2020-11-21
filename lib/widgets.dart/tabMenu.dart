@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-
 import 'package:travellingNepal/app.dart';
 import 'package:travellingNepal/screens/TravellingOption.dart';
 
 class TabMenu extends StatelessWidget {
-  final int index;
-
-  TabMenu({this.index});
-
   final List<IconData> menus = [
     Icons.local_airport,
     Icons.hotel,
+    // Icons.money
+    // Icons.nepali_product
     Icons.directions_walk,
     Icons.motorcycle_rounded
   ];
