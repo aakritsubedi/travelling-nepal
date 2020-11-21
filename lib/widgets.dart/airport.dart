@@ -11,6 +11,7 @@ class Airport extends StatefulWidget {
 class _AirportState extends State<Airport> {
   List arrivals;
   List departure;
+  bool isVisible = false;
 
   getFlightInfo() async {
     Map flightInfo = await AirportService.getFlightInfo();
@@ -18,6 +19,7 @@ class _AirportState extends State<Airport> {
     setState(() {
       arrivals = flightInfo['arrivals'];
       departure = flightInfo['departure'];
+      isVisible = true;
     });
   }
 
@@ -30,11 +32,14 @@ class _AirportState extends State<Airport> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: RaisedButton(
-      onPressed: () {
-        openBottomSheet(context, arrivals, departure);
-      },
-      child: Text('My Airport'),
+        child: Visibility(
+      visible: isVisible,
+      child: RaisedButton(
+        onPressed: () {
+          openBottomSheet(context, arrivals, departure);
+        },
+        child: Text('My Airport'),
+      ),
     ));
   }
 }
