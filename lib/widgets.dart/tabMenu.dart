@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:travellingNepal/app.dart';
+import 'package:travellingNepal/screens/TravellingOption.dart';
 
 class TabMenu extends StatelessWidget {
-
   final int index;
-  final Function setIndex;
 
-  TabMenu({ this.index, this.setIndex });
+  TabMenu({this.index});
 
   final List<IconData> menus = [
     Icons.local_airport,
@@ -16,21 +15,24 @@ class TabMenu extends StatelessWidget {
     Icons.motorcycle_rounded
   ];
 
-  Widget buildIcons(int index) {
+  Widget buildIcons(context ,int index) {
     return GestureDetector(
       onTap: () {
-        setIndex(index);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => TravellingOptions(index: index)),
+        );
       },
       child: Container(
         height: 60.0,
         width: 60.0,
         decoration: BoxDecoration(
-            color: this.index == index ? primaryColor : Color(0xFFE7EBEE),
+            color: Color(0xFFE7EBEE),
             borderRadius: BorderRadius.circular(30.0)),
         child: Icon(
           menus[index],
           size: 25.0,
-          color: this.index == index ? primaryWhite : primaryBlack,
+          color: primaryBlack,
         ),
       ),
     );
@@ -45,7 +47,7 @@ class TabMenu extends StatelessWidget {
           children: menus
               .asMap()
               .entries
-              .map((MapEntry map) => buildIcons(map.key))
+              .map((MapEntry map) => buildIcons(context, map.key))
               .toList(),
         ));
   }

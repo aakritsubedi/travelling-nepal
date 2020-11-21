@@ -16,6 +16,7 @@ dependencies:
   cupertino_icons: ^1.0.0
   toggle_bar_button: ^1.0.1
   http: ^0.12.2
+  curved_navigation_bar: ^0.3.4
 
 dev_dependencies:
   flutter_test:
