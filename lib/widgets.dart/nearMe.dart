@@ -20,7 +20,7 @@ class _NearMeState extends State<NearMe> {
 
   Completer<GoogleMapController> _controller = Completer();
 
-  static LatLng _center = const LatLng(27.01043, 84.87735);
+  static LatLng _center;
 
   final Set<Marker> _marker = {
     Marker(
@@ -37,7 +37,7 @@ class _NearMeState extends State<NearMe> {
   }
 
   _onCameraMove(CameraPosition position) {
-    _lastMapPosition = position.target;
+    // _lastMapPosition = position.target;
   }
 
   @override
@@ -54,16 +54,22 @@ class _NearMeState extends State<NearMe> {
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: Stack(alignment: Alignment.bottomCenter, children: [
-        GoogleMap(
-          onMapCreated: _onMapCreated,
-          initialCameraPosition: CameraPosition(
-            target: _center,
-            zoom: 17.0,
+        Container(
+          height: MediaQuery.of(context).size.height,
+          width: double.infinity,
+          child: GoogleMap(
+            onMapCreated: _onMapCreated,
+            initialCameraPosition: CameraPosition(
+              target: _center,
+              zoom: 17.5,
+              tilt: 20.0
+            ),
+            mapType: _currentMapType,
+            markers: _marker,
+            onCameraMove: _onCameraMove,
+            myLocationButtonEnabled: true,
+            compassEnabled: true,
           ),
-          mapType: _currentMapType,
-          markers: _marker,
-          onCameraMove: _onCameraMove,
-          myLocationButtonEnabled: true,
         ),
         Container(
             margin: EdgeInsets.only(bottom: 400.0),
