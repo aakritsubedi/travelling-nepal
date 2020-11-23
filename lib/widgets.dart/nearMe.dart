@@ -22,14 +22,10 @@ class _NearMeState extends State<NearMe> {
 
   static LatLng _center;
 
-  final Set<Marker> _marker = {
-    Marker(
-      markerId: MarkerId('Your Location'),
-      position: _center,
-      infoWindow: InfoWindow(title: 'You are currently here...'),
-    )
-  };
+  Set<Marker> _marker;
+
   LatLng _lastMapPosition = _center;
+
   MapType _currentMapType = MapType.normal;
 
   _onMapCreated(GoogleMapController controller) {
@@ -37,15 +33,25 @@ class _NearMeState extends State<NearMe> {
   }
 
   _onCameraMove(CameraPosition position) {
-    // _lastMapPosition = position.target;
+    _lastMapPosition = position.target;
   }
 
   @override
   void initState() {
-    print(_center);
     _getCurrentLocation();
     _getAddressFromLatLng();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _disposeController();
+    super.dispose();
+  }
+
+  Future<void> _disposeController() async {
+    final GoogleMapController controller = await _controller.future;
+    controller.dispose();
   }
 
   @override
@@ -57,19 +63,11 @@ class _NearMeState extends State<NearMe> {
         Container(
           height: MediaQuery.of(context).size.height,
           width: double.infinity,
-          child: GoogleMap(
-            onMapCreated: _onMapCreated,
-            initialCameraPosition: CameraPosition(
-              target: _center,
-              zoom: 17.5,
-              tilt: 20.0
-            ),
-            mapType: _currentMapType,
-            markers: _marker,
-            onCameraMove: _onCameraMove,
-            myLocationButtonEnabled: true,
-            compassEnabled: true,
-          ),
+          child: (_center != null || _marker != null)
+              ? _buildMap(_center)
+              : Center(
+                  child: CircularProgressIndicator(),
+                ),
         ),
         Container(
             margin: EdgeInsets.only(bottom: 400.0),
@@ -116,6 +114,13 @@ class _NearMeState extends State<NearMe> {
       setState(() {
         _currentPosition = position;
         _center = LatLng(_currentPosition.latitude, _currentPosition.longitude);
+        _marker = {
+          Marker(
+            markerId: MarkerId('Your Location'),
+            position: _center,
+            infoWindow: InfoWindow(title: 'You are currently here...'),
+          )
+        };
       });
 
       _getAddressFromLatLng();
@@ -140,5 +145,18 @@ class _NearMeState extends State<NearMe> {
     } catch (e) {
       print(e);
     }
+  }
+
+  _buildMap(center) {
+    return GoogleMap(
+      onMapCreated: _onMapCreated,
+      initialCameraPosition:
+          CameraPosition(target: center, zoom: 17.0, tilt: 20.0),
+      mapType: _currentMapType,
+      markers: _marker,
+      onCameraMove: _onCameraMove,
+      myLocationButtonEnabled: true,
+      compassEnabled: true,
+    );
   }
 }
