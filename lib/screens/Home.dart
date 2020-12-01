@@ -1,14 +1,18 @@
+import 'package:camera/camera.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:travellingNepal/app.dart';
+import 'package:travellingNepal/screens/cameraScreen.dart';
 import 'package:travellingNepal/widgets.dart/dashboardSwitch.dart';
-import 'package:travellingNepal/widgets.dart/nearMe.dart';
+
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title, this.tagline}) : super(key: key);
+  MyHomePage({Key key, this.title, this.tagline, this.cameras}) : super(key: key);
 
   final String title;
   final String tagline;
+  final List<CameraDescription> cameras;
+
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -39,11 +43,19 @@ class _MyHomePageState extends State<MyHomePage> {
           setTabIndex(index);
         },
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (_) => CameraScreen(widget.cameras)));
+        },
+        child: Icon(Icons.camera_alt),
+        backgroundColor: Colors.green,
+      ),
       body: SafeArea(
         child: ListView(
-          children: <Widget>[
-            DashboardSwitch(index: selectedTabIndex)
-          ],
+          children: <Widget>[DashboardSwitch(index: selectedTabIndex)],
         ),
       ),
     );

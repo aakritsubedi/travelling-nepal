@@ -13,7 +13,6 @@ class DashboardSwitch extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: 10.0,
-        vertical: 15.0
       ),
       child: Column(
         children: [
