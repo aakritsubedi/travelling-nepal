@@ -1,13 +1,8 @@
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:travellingNepal/app.dart';
 import 'package:travellingNepal/screens/Home.dart';
 
-List<CameraDescription> cameras;
-
-Future<Null> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  cameras = await availableCameras();
+void main() {
   runApp(new MyApp());
 }
 
@@ -22,7 +17,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: App.appName, tagline: App.tagline, cameras: cameras),
+      home: MyHomePage(title: App.appName, tagline: App.tagline),
     );
   }
 }

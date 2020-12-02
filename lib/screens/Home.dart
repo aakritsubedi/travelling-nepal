@@ -1,4 +1,3 @@
-import 'package:camera/camera.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:travellingNepal/app.dart';
@@ -7,11 +6,10 @@ import 'package:travellingNepal/widgets.dart/dashboardSwitch.dart';
 
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title, this.tagline, this.cameras}) : super(key: key);
+  MyHomePage({Key key, this.title, this.tagline}) : super(key: key);
 
   final String title;
   final String tagline;
-  final List<CameraDescription> cameras;
 
 
   @override
@@ -48,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (_) => CameraScreen(widget.cameras)));
+                  builder: (_) => CameraScreen()));
         },
         child: Icon(Icons.camera_alt),
         backgroundColor: Colors.green,
