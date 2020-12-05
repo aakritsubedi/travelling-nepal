@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:travellingNepal/app.dart';
@@ -16,6 +17,8 @@ class _CameraScreenState extends State {
   List cameras;
   int selectedCameraIndex;
   String imgPath;
+  PickedFile image;
+  final ImagePicker _picker = ImagePicker();
 
   @override
   void initState() {
@@ -88,14 +91,15 @@ class _CameraScreenState extends State {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Icon(Icons.arrow_back, color: primaryWhite,)
-                      ),
-                      Spacer(),
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Icon(
+                            Icons.arrow_back,
+                            color: primaryWhite,
+                          )),
+                      _selectPhotoFromGallery(context),
                       _cameraToggleRowWidget(),
-                      SizedBox(width: 10.0),
                       _cameraControlWidget(context),
                       Spacer(),
                       Row(
@@ -143,19 +147,34 @@ class _CameraScreenState extends State {
     );
   }
 
+  /// Display the control bar with buttons to select image from gallery
+  Widget _selectPhotoFromGallery(context) {
+    return Expanded(
+      child: Align(
+          // alignment: Alignment.centerLeft,
+          child: GestureDetector(
+        onTap: () => _imgFromGallery(context),
+        child: Icon(
+          Icons.photo_album,
+          color: Colors.white,
+          size: 22,
+        ),
+      )),
+    );
+  }
+
   /// Display the control bar with buttons to take pictures
   Widget _cameraControlWidget(context) {
     return Expanded(
       child: Align(
         alignment: Alignment.center,
         child: Row(
-          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          // mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             FloatingActionButton(
               child: Icon(
                 Icons.camera,
                 color: Colors.black,
+                size: 22.0,
               ),
               backgroundColor: Colors.white,
               onPressed: () {
@@ -169,7 +188,6 @@ class _CameraScreenState extends State {
   }
 
   /// Display a row of toggle to select the camera (or a message if no camera is available).
-
   Widget _cameraToggleRowWidget() {
     if (cameras == null || cameras.isEmpty) {
       return Spacer();
@@ -181,13 +199,13 @@ class _CameraScreenState extends State {
       child: Align(
           // alignment: Alignment.centerLeft,
           child: GestureDetector(
-            onTap: _onSwitchCamera,
-            child: Icon(
-              _getCameraLensIcon(lensDirection),
-              color: Colors.white,
-              size: 24,
-            ),
-          )),
+        onTap: _onSwitchCamera,
+        child: Icon(
+          _getCameraLensIcon(lensDirection),
+          color: Colors.white,
+          size: 22,
+        ),
+      )),
     );
   }
 
@@ -224,6 +242,23 @@ class _CameraScreenState extends State {
       );
     } catch (e) {
       _showCameraException(e);
+    }
+  }
+
+  _imgFromGallery(context) async {
+    PickedFile image = await _picker.getImage(
+      source: ImageSource.gallery,
+      imageQuality: 50,
+    );
+
+    if (true) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => PreviewScreen(
+                  imgPath: image.path,
+                )),
+      );
     }
   }
 

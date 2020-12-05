@@ -1,35 +1,52 @@
 import 'dart:convert';
+import 'dart:io' as Io;
+import 'dart:typed_data';
 import 'package:http/http.dart' as http;
+import 'package:path_provider/path_provider.dart';
 
 import 'package:travellingNepal/models/stories.dart';
 
 class StoriesService {
   static String baseUrl = 'https://travellingnepal.al-ayan.com/public/api';
 
-  static Future<List<Stories>> fetchAllStories () async {
-    http.Response response = await http.get(
-      baseUrl+'/stories' 
-    );
+  static Future<List<Stories>> fetchAllStories() async {
+    http.Response response = await http.get(baseUrl + '/stories');
 
-    List stories = jsonDecode(response.body); 
+    List stories = jsonDecode(response.body);
     List allStories = stories.map((story) {
       return Stories.fromJson(story);
     }).toList();
 
-    return allStories;
+    return List.from(allStories.reversed);
   }
 
-  static Future<List<Stories>> fetchHrsStories (hrs) async {
-    http.Response response = await http.get(
-      baseUrl+'/stories/lastHrsStories/'+hrs 
-    );
+  static Future<List<Stories>> fetchHrsStories(hrs) async {
+    http.Response response =
+        await http.get(baseUrl + '/stories/lastHrsStories/' + hrs);
 
-    List stories = jsonDecode(response.body); 
+    List stories = jsonDecode(response.body);
     List lastHrsStories = stories.map((story) {
       return Stories.fromJson(story);
     }).toList();
 
-    return lastHrsStories;
+    return List.from(lastHrsStories.reversed);
   }
 
+  static Future<bool> addStories(Map data) async {
+    http.Response response = await http.post(baseUrl + '/stories', body: {
+      "caption": data['caption'],
+      "uploadedBy": data['uploadedBy'],
+      "location": data['location'],
+      "coordinate": data['coordinate'],
+      "filename": data['filename'],
+      "imageBase64": data['imageBase64'],
+      "type": data['type']
+    });
+
+    if(jsonDecode(response.body)['status'] == 1) {
+      return true;
+    }
+
+    return false;
+  }
 }
