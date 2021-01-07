@@ -10,7 +10,7 @@ class HomeBanner extends StatelessWidget {
             primaryBlack,
             25.0,
             true,
-            EdgeInsets.only(left: 20.0, top: 30.0, right: 60.0),
+            null,
             null,
             null));
   }
