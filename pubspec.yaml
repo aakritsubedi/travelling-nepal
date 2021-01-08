@@ -23,6 +23,7 @@ dependencies:
   path_provider: ^1.1.0
   path: ^1.6.2
   story_view: ^0.12.5
+  dotted_border: ^1.0.7
   image_picker: ^0.6.7+14
 
 dev_dependencies:

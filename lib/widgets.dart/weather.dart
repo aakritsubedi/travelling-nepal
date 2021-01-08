@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Weather extends StatefulWidget {
   @override
@@ -28,8 +27,9 @@ class _WeatherState extends State<Weather> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text(_district, style: TextStyle(fontWeight: FontWeight.w300)),
+        Text(_district ?? 'Nepal', style: TextStyle(fontWeight: FontWeight.w300)),
         Text('13°C', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 22.0),),
+        Text('Foggy', style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12.0),),
       ],
     );
   }

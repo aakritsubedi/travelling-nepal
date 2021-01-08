@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:travellingNepal/models/nearMe.dart';
+import 'package:travellingNepal/widgets.dart/weather.dart';
 
 class NearMe extends StatefulWidget {
   @override
@@ -73,6 +74,10 @@ class _NearMeState extends State<NearMe> {
                 ),
         ),
         Positioned(
+          top: 5.0,
+          child: Weather(),
+        ),
+        Positioned(
             bottom: 15.0,
             child: Container(
               height: 150.0,
@@ -128,10 +133,10 @@ class _NearMeState extends State<NearMe> {
             _gotoLocation(_center.latitude, _center.longitude);
           },
           child: Container(
-              margin: EdgeInsets.only(bottom: 400.0),
+              margin: EdgeInsets.only(bottom: 375.0),
               child: Center(
                   child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 20.0),
+                      padding: EdgeInsets.symmetric(vertical: 15.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5.0),
                         boxShadow: [

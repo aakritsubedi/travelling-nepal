@@ -1,3 +1,4 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:travellingNepal/app.dart';
 import 'package:travellingNepal/screens/previewStory.dart';
@@ -21,7 +22,28 @@ class DefaultContent extends StatelessWidget {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (_) => PreviewStories()));
               },
-              child: Text('Stories')),
+              child: DottedBorder(
+                color: secondaryColor,
+                borderType: BorderType.RRect,
+                radius: Radius.circular(25),
+                padding: EdgeInsets.all(2),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(25)),
+                  child: Container(
+                    decoration: new BoxDecoration(
+                        gradient: new LinearGradient(
+                          colors: [
+                            secondaryColor,
+                            primaryColor,
+                          ],
+                        )),
+                    height: 40,
+                    width: 40,
+                    child: Image.asset('assets/images/flag.gif',
+                        height: 30.0, width: 30.0),
+                  ),
+                ),
+              )),
         ],
       ),
       SizedBox(height: 15.0),
