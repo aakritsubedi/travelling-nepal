@@ -22,7 +22,6 @@ class _PreviewScreenState extends State<PreviewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.imgPath);
     return SafeArea(
       child: Scaffold(
         body: Container(

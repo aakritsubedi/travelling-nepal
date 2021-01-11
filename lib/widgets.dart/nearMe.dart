@@ -5,15 +5,18 @@ import 'package:flutter/widgets.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:travellingNepal/models/nearMe.dart';
+import 'package:travellingNepal/services/nearMe.dart';
 import 'package:travellingNepal/widgets.dart/weather.dart';
 
-class NearMe extends StatefulWidget {
+class NearMes extends StatefulWidget {
   @override
-  _NearMeState createState() => _NearMeState();
+  _NearMesState createState() => _NearMesState();
 }
 
-class _NearMeState extends State<NearMe> {
+class _NearMesState extends State<NearMes> {
   final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
+
+  List<NearMe> nearMePlaces = [];
 
   Position _currentPosition;
   String _currentAddress;
@@ -43,6 +46,7 @@ class _NearMeState extends State<NearMe> {
   void initState() {
     _getCurrentLocation();
     _getAddressFromLatLng();
+    _getNearMePlaces();
     super.initState();
   }
 
@@ -81,15 +85,15 @@ class _NearMeState extends State<NearMe> {
             bottom: 15.0,
             child: Container(
               height: 150.0,
-              width: MediaQuery.of(context).size.width -25,
+              width: MediaQuery.of(context).size.width - 25,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: nearMePlaces.length,
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
-                      _gotoLocation(
-                          nearMePlaces[index].lat, nearMePlaces[index].lng);
+                      _gotoLocation(double.parse(nearMePlaces[index].lat),
+                          double.parse(nearMePlaces[index].lon));
                     },
                     child: Container(
                       width: 150.0,
@@ -100,27 +104,32 @@ class _NearMeState extends State<NearMe> {
                         ],
                         color: Colors.grey[50],
                       ),
-                      margin: EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
+                      margin:
+                          EdgeInsets.symmetric(horizontal: 5.0, vertical: 10.0),
                       padding: EdgeInsets.all(10.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             nearMePlaces[index].title,
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 12.0),
                           ),
                           Row(
                             children: [
                               Icon(Icons.card_travel_sharp, size: 10.0),
                               SizedBox(width: 3.0),
-                              Text(nearMePlaces[index].type, style: TextStyle(fontSize: 10.0),)
+                              Text(
+                                nearMePlaces[index].type,
+                                style: TextStyle(fontSize: 10.0),
+                              )
                             ],
                           ),
                           SizedBox(height: 3.0),
                           Text(
                             nearMePlaces[index].desc,
                             style: TextStyle(fontSize: 12.0),
-                          ),    
+                          ),
                         ],
                       ),
                     ),
@@ -233,5 +242,13 @@ class _NearMeState extends State<NearMe> {
       tilt: 30.0,
       bearing: 10.0,
     )));
+  }
+
+  void _getNearMePlaces() async {
+    List<NearMe> nearMePlaces = await NearMeServices.fetchAllNearMe();
+
+    setState(() {
+      this.nearMePlaces = nearMePlaces;
+    });
   }
 }

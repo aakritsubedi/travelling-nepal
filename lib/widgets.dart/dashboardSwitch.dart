@@ -17,7 +17,7 @@ class DashboardSwitch extends StatelessWidget {
       child: Column(
         children: [
          if(index == 0) DefaultContent()
-         else if(index == 2) NearMe()
+         else if(index == 2) NearMes()
         ] 
       ),
     );
