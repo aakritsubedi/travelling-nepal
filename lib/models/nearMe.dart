@@ -38,7 +38,7 @@ class NearMe {
     this.lon = json['lon'] ?? 0;
     this.desc = json['desc'];
     this.description = json['description'];
-    this.placeName = json['placeName'];
+    this.placeName = json['place_name'];
     this.contactInfo = json['contactInfo'];
     this.category = json['category'];
     this.type = json['type'];

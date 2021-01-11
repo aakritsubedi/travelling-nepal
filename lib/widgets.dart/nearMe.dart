@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:travellingNepal/app.dart';
 import 'package:travellingNepal/models/nearMe.dart';
 import 'package:travellingNepal/services/nearMe.dart';
 import 'package:travellingNepal/widgets.dart/weather.dart';
@@ -84,7 +85,7 @@ class _NearMesState extends State<NearMes> {
         Positioned(
             bottom: 15.0,
             child: Container(
-              height: 150.0,
+              height: 125.0,
               width: MediaQuery.of(context).size.width - 25,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
@@ -96,7 +97,7 @@ class _NearMesState extends State<NearMes> {
                           double.parse(nearMePlaces[index].lon));
                     },
                     child: Container(
-                      width: 150.0,
+                      width: 160.0,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5.0),
                         boxShadow: [
@@ -110,11 +111,10 @@ class _NearMesState extends State<NearMes> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            nearMePlaces[index].title,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 12.0),
-                          ),
+                          Text(nearMePlaces[index].title,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 12.0),
+                              overflow: TextOverflow.ellipsis),
                           Row(
                             children: [
                               Icon(Icons.card_travel_sharp, size: 10.0),
@@ -126,10 +126,14 @@ class _NearMesState extends State<NearMes> {
                             ],
                           ),
                           SizedBox(height: 3.0),
+                          Text(nearMePlaces[index].desc.length !=0 ? nearMePlaces[index].desc+' ...' : '',
+                              style: TextStyle(fontSize: 10.0),
+                              overflow: TextOverflow.clip),
+                          SizedBox(height: 3.0),
                           Text(
-                            nearMePlaces[index].desc,
-                            style: TextStyle(fontSize: 12.0),
-                          ),
+                            nearMePlaces[index].placeName ?? '',
+                            style: TextStyle(fontSize: 6.0, color: primaryGrey),
+                            overflow: TextOverflow.fade),
                         ],
                       ),
                     ),
