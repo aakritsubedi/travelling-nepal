@@ -30,8 +30,8 @@ class NearMe {
       });
 
   NearMe.fromJson(Map json) {
-    this.districtName = json['districtName'];
-    this.districtCode = json['districtCode'];
+    this.districtName = json['district_name'];
+    this.districtCode = json['district_code'];
     this.title = json['title'];
     this.lat = json['lat'] ?? 0;
     this.lon = json['lon'] ?? 0;

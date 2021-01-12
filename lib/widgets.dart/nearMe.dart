@@ -128,7 +128,7 @@ class _NearMesState extends State<NearMes> {
                               Icon(Icons.add_location, size: 10.0),
                               SizedBox(width: 1.0),
                               Text(
-                                '${nearMePlaces[index].distanceBetween.toString().substring(0,4)}km',
+                                '${nearMePlaces[index].distanceBetween.toString().substring(0, 4)}km',
                                 style: TextStyle(fontSize: 10.0),
                               ),
                             ],
@@ -288,15 +288,26 @@ class _NearMesState extends State<NearMes> {
   }
 
   void _sortMyNearMePlaces() {
-    nearMePlaces.sort((p1,p2) => p1.distanceBetween.compareTo(p2.distanceBetween));
+    nearMePlaces
+        .sort((p1, p2) => p1.distanceBetween.compareTo(p2.distanceBetween));
   }
+
   void _topNearMe(counter) {
-    nearMePlaces = nearMePlaces.sublist(0,counter);
+    nearMePlaces = nearMePlaces.sublist(0, counter);
+    nearMePlaces.forEach((place) {
+      _marker.add(
+        Marker(
+          markerId: MarkerId(place.title),
+          position: LatLng(double.parse(place.lat), double.parse(place.lon)),
+          infoWindow: InfoWindow(title: place.title),
+        ),
+      );
+    });
   }
 
   void _getNearMePlaces() async {
     List<NearMe> nearMePlaces = await NearMeServices.fetchAllNearMe();
-    
+
     setState(() {
       this.nearMePlaces = nearMePlaces;
     });
