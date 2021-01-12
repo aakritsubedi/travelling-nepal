@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:geolocator/geolocator.dart';
@@ -122,18 +123,28 @@ class _NearMesState extends State<NearMes> {
                               Text(
                                 nearMePlaces[index].type,
                                 style: TextStyle(fontSize: 10.0),
-                              )
+                              ),
+                              SizedBox(width: 5.0),
+                              Icon(Icons.add_location, size: 10.0),
+                              SizedBox(width: 1.0),
+                              Text(
+                                '${nearMePlaces[index].distanceBetween.toString().substring(0,4)}km',
+                                style: TextStyle(fontSize: 10.0),
+                              ),
                             ],
                           ),
-                          SizedBox(height: 3.0),
-                          Text(nearMePlaces[index].desc.length !=0 ? nearMePlaces[index].desc+' ...' : '',
+                          SizedBox(height: 8.0),
+                          Text(
+                              nearMePlaces[index].desc.length != 0
+                                  ? nearMePlaces[index].desc + ' ...'
+                                  : '',
                               style: TextStyle(fontSize: 10.0),
                               overflow: TextOverflow.clip),
                           SizedBox(height: 3.0),
-                          Text(
-                            nearMePlaces[index].placeName ?? '',
-                            style: TextStyle(fontSize: 6.0, color: primaryGrey),
-                            overflow: TextOverflow.fade),
+                          Text(nearMePlaces[index].placeName ?? '',
+                              style:
+                                  TextStyle(fontSize: 6.0, color: primaryGrey),
+                              overflow: TextOverflow.fade),
                         ],
                       ),
                     ),
@@ -248,11 +259,49 @@ class _NearMesState extends State<NearMes> {
     )));
   }
 
+  double getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+    var R = 6371; // Radius of the earth in km
+    var dLat = deg2rad(lat2 - lat1); // deg2rad below
+    var dLon = deg2rad(lon2 - lon1);
+    var a = sin(dLat / 2) * sin(dLat / 2) +
+        cos(deg2rad(lat1)) * cos(deg2rad(lat2)) * sin(dLon / 2) * sin(dLon / 2);
+    var c = 2 * atan2(sqrt(a.abs()), sqrt((1 - a).abs()));
+    var d = R * c; // Distance in km
+
+    return d;
+  }
+
+  double deg2rad(deg) {
+    return deg * (pi / 180);
+  }
+
+  void _computeDistanceBetween() {
+    nearMePlaces.forEach((place) {
+      double lat1 = double.parse(place.lat);
+      double lon1 = double.parse(place.lon);
+
+      double lat2 = _center.latitude;
+      double lon2 = _center.longitude;
+
+      place.distanceBetween = getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2);
+    });
+  }
+
+  void _sortMyNearMePlaces() {
+    nearMePlaces.sort((p1,p2) => p1.distanceBetween.compareTo(p2.distanceBetween));
+  }
+  void _topNearMe(counter) {
+    nearMePlaces = nearMePlaces.sublist(0,counter);
+  }
+
   void _getNearMePlaces() async {
     List<NearMe> nearMePlaces = await NearMeServices.fetchAllNearMe();
-
+    
     setState(() {
       this.nearMePlaces = nearMePlaces;
     });
+    _computeDistanceBetween();
+    _sortMyNearMePlaces();
+    _topNearMe(25);
   }
 }

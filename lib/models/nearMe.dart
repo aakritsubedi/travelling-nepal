@@ -11,8 +11,7 @@ class NearMe {
   String category;
   String type;
   String googleMapLink;
-  double deltaLat;
-  double deltaLon;
+  double distanceBetween;
 
   NearMe(
       {this.districtName,
@@ -27,8 +26,8 @@ class NearMe {
       this.category,
       this.type,
       this.googleMapLink,
-      this.deltaLat,
-      this.deltaLon});
+      this.distanceBetween,
+      });
 
   NearMe.fromJson(Map json) {
     this.districtName = json['districtName'];
@@ -43,7 +42,6 @@ class NearMe {
     this.category = json['category'];
     this.type = json['type'];
     this.googleMapLink = json['googleMapLink'];
-    this.deltaLat = 0;
-    this.deltaLon = 0;
+    this.distanceBetween = 0;
   }
 }
