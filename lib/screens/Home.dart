@@ -4,13 +4,11 @@ import 'package:travellingNepal/app.dart';
 import 'package:travellingNepal/screens/cameraScreen.dart';
 import 'package:travellingNepal/widgets.dart/dashboardSwitch.dart';
 
-
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title, this.tagline}) : super(key: key);
 
   final String title;
   final String tagline;
-
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -44,16 +42,15 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (_) => CameraScreen()));
+              context, MaterialPageRoute(builder: (_) => CameraScreen()));
         },
         child: Icon(Icons.camera_alt),
         backgroundColor: Colors.green,
       ),
       body: SafeArea(
-        child: ListView(
-          children: <Widget>[DashboardSwitch(index: selectedTabIndex)],
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: DashboardSwitch(index: selectedTabIndex),
         ),
       ),
     );
