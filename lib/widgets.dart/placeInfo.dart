@@ -11,24 +11,13 @@ class PlaceInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10.0),
+      padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              place.imageUrl.length != 0
-                  ? Image.network(
-                      place.imageUrl,
-                      height: 150.0,
-                      width: 150.0,
-                    )
-                  : Image.asset(
-                      'assets/images/header-bg.png',
-                      height: 150.0,
-                      width: 150.0,
-                    ),
-              SizedBox(width: 25.0),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -39,7 +28,7 @@ class PlaceInfo extends StatelessWidget {
                           fontWeight: FontWeight.w700,
                           color: primaryBlack)),
                   Text(place.address,
-                      overflow: TextOverflow.clip,
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                           fontSize: 12.0,
                           fontWeight: FontWeight.w400,
@@ -51,7 +40,18 @@ class PlaceInfo extends StatelessWidget {
                           fontWeight: FontWeight.w400,
                           color: primaryBlack))
                 ],
-              )
+              ),
+              place.imageUrl.length != 0
+                  ? Image.network(
+                      place.imageUrl,
+                      height: 50.0,
+                      width: 50.0,
+                    )
+                  : Image.asset(
+                      'assets/images/header-bg.png',
+                      height: 50.0,
+                      width: 50.0,
+                    ),
             ],
           ),
           Text(

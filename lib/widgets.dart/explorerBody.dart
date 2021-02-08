@@ -92,7 +92,7 @@ void openBottomSheet(context, Explorer place) {
         return Container(
             color: Colors.transparent,
             child: Padding(
-                padding: EdgeInsets.only(top: 50.0),
+                padding: EdgeInsets.only(top: 100.0),
                 child: Container(
                     decoration: BoxDecoration(
                         color: Colors.white,
@@ -100,7 +100,7 @@ void openBottomSheet(context, Explorer place) {
                           topLeft: Radius.circular(20.0),
                           topRight: Radius.circular(20.0),
                         )),
-                    height: 350.0,
+                    height: 300.0,
                     child: PlaceInfo(place: place))));
       });
 }
