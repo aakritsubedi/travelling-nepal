@@ -1,5 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:travellingNepal/app.dart';
+import 'package:travellingNepal/models/explorer.dart';
+import 'package:travellingNepal/widgets.dart/placeInfo.dart';
 
 class ExplorerBody extends StatelessWidget {
   final List<dynamic> places;
@@ -10,15 +13,18 @@ class ExplorerBody extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10.0),
       child: Stack(children: [
-        Container(
-          width: MediaQuery.of(context).size.width - 50,
-          height: 180.0,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(8.0)),
-            color: primaryWhite,
-            image: DecorationImage(
-              image: NetworkImage(place.imageUrl),
-              fit: BoxFit.fill,
+        GestureDetector(
+          onTap: () => openBottomSheet(context, place),
+          child: Container(
+            width: MediaQuery.of(context).size.width - 50,
+            height: 180.0,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(8.0)),
+              color: primaryWhite,
+              image: DecorationImage(
+                image: place.imageUrl.length != 0 ? NetworkImage(place.imageUrl) : AssetImage('assets/images/header-bg.png'),
+                fit: BoxFit.fill,
+              ),
             ),
           ),
         ),
@@ -76,3 +82,26 @@ class ExplorerBody extends StatelessWidget {
     );
   }
 }
+
+void openBottomSheet(context, Explorer place) {
+  showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (BuildContext bc) {
+        return Container(
+            color: Colors.transparent,
+            child: Padding(
+                padding: EdgeInsets.only(top: 50.0),
+                child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20.0),
+                          topRight: Radius.circular(20.0),
+                        )),
+                    height: 350.0,
+                    child: PlaceInfo(place: place))));
+      });
+}
+
