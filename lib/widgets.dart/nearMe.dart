@@ -81,7 +81,7 @@ class _NearMesState extends State<NearMes> {
         ),
         Positioned(
           top: 5.0,
-          child: Weather(),
+          child: WeatherBox(),
         ),
         Positioned(
             bottom: 15.0,

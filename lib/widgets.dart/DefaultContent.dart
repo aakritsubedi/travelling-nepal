@@ -16,7 +16,7 @@ class DefaultContent extends StatelessWidget {
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Weather(),
+          WeatherBox(),
           GestureDetector(
               onTap: () {
                 Navigator.push(context,
@@ -46,6 +46,8 @@ class DefaultContent extends StatelessWidget {
               )),
         ],
       ),
+      SizedBox(height: 5.0),
+      Divider(height: 1.0),
       SizedBox(height: 15.0),
       HomeBanner(),
       SizedBox(height: 10.0),
